@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.thebluealliance.spectrum"
@@ -26,11 +25,11 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'com.android.support:preference-v7:23.2.1'
-    compile 'com.android.support:preference-v14:23.2.1'
-    compile 'com.android.support:design:23.2.1'
-    compile 'com.wada811:android-material-design-colors:3.0.0'
-    compile project(':spectrum')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:23.2.1'
+    implementation 'com.android.support:preference-v7:23.2.1'
+    implementation 'com.android.support:preference-v14:23.2.1'
+    implementation 'com.android.support:design:23.2.1'
+    implementation 'com.wada811:android-material-design-colors:3.0.0'
+    implementation project(':spectrum')
 }

@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class ColorItem extends FrameLayout implements View.OnClickListener {
 
@@ -34,13 +35,17 @@ public class ColorItem extends FrameLayout implements View.OnClickListener {
     private @ColorInt int mColor;
     private boolean mIsSelected = false;
     private int mOutlineWidth = 0;
+    private Drawable mCustomSelectedCheckmark = null;
+    private int mCheckmarkMargin = -1;
 
-    public ColorItem(Context context, @ColorInt int color, boolean isSelected, EventBus eventBus) {
+    public ColorItem(Context context, @ColorInt int color, boolean isSelected, EventBus eventBus, Drawable selectedCheckmark, int checkmarkMargin) {
         super(context);
 
         mColor = color;
         mIsSelected = isSelected;
         mEventBus = eventBus;
+        mCustomSelectedCheckmark = selectedCheckmark;
+        mCheckmarkMargin = checkmarkMargin;
 
         init();
         setChecked(mIsSelected);
@@ -73,7 +78,17 @@ public class ColorItem extends FrameLayout implements View.OnClickListener {
 
         LayoutInflater.from(getContext()).inflate(R.layout.color_item, this, true);
         mItemCheckmark = (ImageView) findViewById(R.id.selected_checkmark);
-        mItemCheckmark.setColorFilter(ColorUtil.isColorDark(mColor) ? Color.WHITE : Color.BLACK);
+
+        if (mCustomSelectedCheckmark != null) {
+            mItemCheckmark.setImageDrawable(mCustomSelectedCheckmark);
+        } else {
+            mItemCheckmark.setColorFilter(ColorUtil.isColorDark(mColor) ? Color.WHITE : Color.BLACK);
+        }
+
+        if (mCheckmarkMargin != -1) {
+            MarginLayoutParams marginParams = (MarginLayoutParams) mItemCheckmark.getLayoutParams();
+            marginParams.setMargins(mCheckmarkMargin, mCheckmarkMargin, mCheckmarkMargin, mCheckmarkMargin);
+        }
     }
 
     /**
