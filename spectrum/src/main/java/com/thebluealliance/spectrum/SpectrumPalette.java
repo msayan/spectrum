@@ -8,9 +8,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -43,8 +41,7 @@ public class SpectrumPalette extends LinearLayout {
     private int mOriginalPaddingTop = 0;
     private int mOriginalPaddingBottom = 0;
     private boolean mSetPaddingCalledInternally = false;
-    private Drawable mCustomSelectedImage = null;
-    private int mCustomSelectedImageMargin = -1;
+
     private int mNumColumns = 2;
     private int mOldNumColumns = -1;
     private boolean mViewInitialized = false;
@@ -71,12 +68,6 @@ public class SpectrumPalette extends LinearLayout {
         mAutoPadding = a.getBoolean(R.styleable.SpectrumPalette_spectrum_autoPadding, false);
         mOutlineWidth = a.getDimensionPixelSize(R.styleable.SpectrumPalette_spectrum_outlineWidth, 0);
         mFixedColumnCount = a.getInt(R.styleable.SpectrumPalette_spectrum_columnCount, -1);
-
-        mColorItemDimension = a.getDimensionPixelSize(R.styleable.SpectrumPalette_spectrum_color_item_size, 48);
-        mColorItemMargin = a.getDimensionPixelSize(R.styleable.SpectrumPalette_spectrum_color_item_margins, 8);
-        mCustomSelectedImage = a.getDrawable(R.styleable.SpectrumPalette_spectrum_custom_selected_img);
-        mCustomSelectedImageMargin = a.getDimensionPixelSize(R.styleable.SpectrumPalette_spectrum_custom_selected_check_margins, 8);
-
         if (mFixedColumnCount != -1) {
             mHasFixedColumnCount = true;
         }
@@ -92,6 +83,9 @@ public class SpectrumPalette extends LinearLayout {
     private void init() {
         mEventBus = new EventBus();
         mEventBus.register(this);
+
+        mColorItemDimension = getResources().getDimensionPixelSize(R.dimen.color_item_small);
+        mColorItemMargin = getResources().getDimensionPixelSize(R.dimen.color_item_margins_small);
 
         setOrientation(LinearLayout.VERTICAL);
     }
@@ -278,7 +272,7 @@ public class SpectrumPalette extends LinearLayout {
     }
 
     private ColorItem createColorItem(int color, int selectedColor) {
-        ColorItem view = new ColorItem(getContext(), color, color == selectedColor, mEventBus, mCustomSelectedImage, mCustomSelectedImageMargin);
+        ColorItem view = new ColorItem(getContext(), color, color == selectedColor, mEventBus);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mColorItemDimension, mColorItemDimension);
         params.setMargins(mColorItemMargin, mColorItemMargin, mColorItemMargin, mColorItemMargin);
         view.setLayoutParams(params);
