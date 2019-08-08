@@ -3,15 +3,17 @@
 
 Spectrum is an Android library that makes it easy to let your user pick from a list of colors.
 
-<img src="https://raw.githubusercontent.com/the-blue-alliance/spectrum/master/art/dialog.png" width="250">
-<img src="https://raw.githubusercontent.com/the-blue-alliance/spectrum/master/art/preferences.png" width="250">
-<img src="https://raw.githubusercontent.com/the-blue-alliance/spectrum/master/art/palette.png" width="250">
+<img src="https://raw.githubusercontent.com/alexeypertcev/spectrum/master/art/dialog.png" width="250">
+<img src="https://raw.githubusercontent.com/alexeypertcev/spectrum/master/art/preferences.png" width="250">
+<img src="https://raw.githubusercontent.com/alexeypertcev/spectrum/master/art/palette.png" width="250">
+<img src="https://raw.githubusercontent.com/alexeypertcev/spectrum/master/art/palette_custom.png" width="250">
 
 ## Download
 
 Download with Gradle:
 ```groovy
-compile 'com.thebluealliance:spectrum:0.7.1'
+implementation 'com.alexeypertcev:spectrum:0.7.1-fork'
+implementation 'org.greenrobot:eventbus:3.0.0'
 ```
 
 The library is hosted on both Bintray (JCenter) and Maven Central; use whichever you prefer.
