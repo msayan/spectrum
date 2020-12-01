@@ -95,6 +95,14 @@ public class SpectrumPalette extends LinearLayout {
     }
 
     /**
+     * Gets the selected color.
+     * @return selected color
+     */
+    public int getSelectedColor() {
+        return mSelectedColor;
+    }
+
+    /**
      * Sets the colors that this palette will display
      *
      * @param colors an array of ARGB colors
